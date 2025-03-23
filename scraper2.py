@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 # URL de la página a scrapear
-url = "https://www.renovare.cl/"  # Cambia esto por la URL que desees scrapear
+url = "https://www.renovare.cl/"
 
 # Hacer la solicitud HTTP
 response = requests.get(url)
@@ -13,17 +13,18 @@ if response.status_code == 200:
     # Parsear el contenido HTML
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Extraer los títulos de las noticias (ajusta el selector según la página)
-    titles = soup.find_all('h2')  # Cambia 'h2' por el tag correcto
+    # Extraer los títulos de las entradas del blog
+    # Usamos la clase 'entry-title' para encontrar los títulos
+    titles = soup.find_all('h2', class_='entry-title')
 
     # Crear una lista con los títulos
-    news_titles = [title.text.strip() for title in titles]
+    blog_titles = [title.text.strip() for title in titles]
 
     # Guardar los datos en un DataFrame de pandas
-    df = pd.DataFrame(news_titles, columns=["Título"])
+    df = pd.DataFrame(blog_titles, columns=["Título"])
 
     # Guardar los datos en un archivo CSV
-    df.to_csv("news_titles.csv", index=False)
-    print("Datos guardados en 'news_titles.csv'")
+    df.to_csv("blog_titles.csv", index=False)
+    print("Datos guardados en 'blog_titles.csv'")
 else:
     print(f"Error al acceder a la página: {response.status_code}")
