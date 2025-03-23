@@ -13,4 +13,4 @@ Este es un proyecto de web scraping que extrae títulos de noticias de un sitio 
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/web-scraping-project.git
+   git clone https://github.com/jadm2907/web-scraping-project.git
